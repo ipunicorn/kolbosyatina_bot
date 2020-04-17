@@ -1,0 +1,7 @@
+{
+    "name": "ipunicorn/kolbosyatina_bot",
+    "type": "project",
+    "require": {
+        "longman/telegram-bot": "*"
+    }
+}
