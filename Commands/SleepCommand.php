@@ -22,7 +22,7 @@ class SleepCommand extends UserCommand
         $dateDiff = $now - $bDate;
         $daysDiff = round($dateDiff / (60 * 60 * 24));
 
-        $text = "Сегодня я хочу спасть с ";
+        $text = "1 Сегодня я хочу спасть с ";
         $text .= $daysDiff % 2 == 0 ? "Ирочкой 🦄" : "Семочкой 🐁";
 
         $data = [
