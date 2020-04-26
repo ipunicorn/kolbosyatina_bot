@@ -14,8 +14,6 @@ class SleepCommand extends UserCommand
 
     public function execute()
     {
-        date_default_timezone_set("Europe/Moscow");
-
         $message = $this->getMessage();
         $chat_id = $message->getChat()->getId();
 
