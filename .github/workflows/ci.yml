@@ -1,24 +1,19 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v1
+
     - name: Deploy to Server
       uses: easingthemes/ssh-deploy@v2.1.1
       env:
@@ -28,7 +23,11 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_TARGET }}
-    - name: Run composer
-      uses: nick-zh/composer-php@master
-      with:
-        action: 'install -oa'
+
+    - name: Run SSH commands
+        uses: garygrossgarten/github-action-ssh@v0.5.0
+        with:
+          command: cd ${{ secrets.REMOTE_TARGET }} && rm -rf vendor composer.lock && composer install
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          privateKey: ${{ secrets.SERVER_SSH_KEY }}
