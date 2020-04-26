@@ -2,6 +2,7 @@
     "name": "ipunicorn/kolbosyatina_bot",
     "type": "project",
     "require": {
-        "longman/telegram-bot": "*"
+        "longman/telegram-bot": "*",
+        "vlucas/phpdotenv": "^4.1"
     }
 }
