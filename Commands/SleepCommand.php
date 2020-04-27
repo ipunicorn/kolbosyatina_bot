@@ -22,8 +22,7 @@ class SleepCommand extends AdminCommand
         $dateDiff = $now - $bDate;
         $daysDiff = round($dateDiff / (60 * 60 * 24));
 
-        if (date('G', $now) >= 0 && date('G', $now) < 4)
-        {
+        if ((int) date('G', $now) < 4) {
             $daysDiff -= 1;
         }
 
