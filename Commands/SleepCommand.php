@@ -1,11 +1,11 @@
 <?php
 
-namespace Longman\TelegramBot\Commands\UserCommands;
+namespace Longman\TelegramBot\Commands\AdminCommands;
 
-use Longman\TelegramBot\Commands\UserCommand;
+use Longman\TelegramBot\Commands\AdminCommand;
 use Longman\TelegramBot\Request;
 
-class SleepCommand extends UserCommand
+class SleepCommand extends AdminCommand
 {
     protected $name = 'sleep';
     protected $description = 'A command for test';
