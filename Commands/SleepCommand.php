@@ -22,6 +22,11 @@ class SleepCommand extends AdminCommand
         $dateDiff = $now - $bDate;
         $daysDiff = round($dateDiff / (60 * 60 * 24));
 
+        if (date('G', $now) >= 0 && date('G', $now) < 4)
+        {
+            $daysDiff -= 1;
+        }
+
         $text = "Сегодня я хочу спасть с ";
         $text .= $daysDiff % 2 == 0 ? "Ирочкой 🦄" : "Семочкой 🐁";
 
