@@ -4,5 +4,10 @@
     "require": {
         "longman/telegram-bot": "*",
         "vlucas/phpdotenv": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bot\\": "src/"
+        }
     }
 }

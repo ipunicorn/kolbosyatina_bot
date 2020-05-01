@@ -20,11 +20,6 @@ try {
 
     $telegram->addCommandsPaths($commands_paths);
 
-    $telegram->enableAdmins([
-        211021342,
-        196716767,
-    ]);
-
     $telegram->enableLimiter();
 
     $telegram->handle();
