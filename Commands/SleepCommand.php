@@ -1,28 +1,40 @@
 <?php
 
-namespace Longman\TelegramBot\Commands\AdminCommands;
+namespace Longman\TelegramBot\Commands\UserCommands;
 
-use Longman\TelegramBot\Commands\AdminCommand;
+use Longman\TelegramBot\Commands\UserCommand;
 use Longman\TelegramBot\Request;
+use Bot\Traits\AdminsTrait;
 
-class SleepCommand extends AdminCommand
+class SleepCommand extends UserCommand
 {
-    protected $name = 'sleep';
-    protected $description = 'A command for test';
-    protected $usage = '/sleep';
-    protected $version = '1.0.0';
+    use AdminsTrait;
+
+    protected $name = "sleep";
+    protected $description = "A command for test";
+    protected $usage = "/sleep";
+    protected $version = "1.0.0";
 
     public function execute()
     {
         $message = $this->getMessage();
-        $chat_id = $message->getChat()->getId();
+        $chatId = $message->getChat()->getId();
+        $fromId = $message->getFrom()->getId();
+
+        if (!$this->isAdmin($fromId)) {
+            return Request::sendMessage([
+                "chat_id" => $chatId,
+                "text" => $this->accessDeniesMessage,
+            ]);
+        }
+
 
         $now = time();
         $bDate = strtotime("2020-01-11");
         $dateDiff = $now - $bDate;
         $daysDiff = round($dateDiff / (60 * 60 * 24));
 
-        if ((int) date('G', $now) < 4) {
+        if ((int)date('G', $now) < 4) {
             $daysDiff -= 1;
         }
 
@@ -30,8 +42,8 @@ class SleepCommand extends AdminCommand
         $text .= $daysDiff % 2 == 0 ? "Ирочкой 🦄" : "Семочкой 🐁";
 
         $data = [
-            'chat_id' => $chat_id,
-            'text'    => $text,
+            "chat_id" => $chatId,
+            "text" => $text,
         ];
 
         return Request::sendMessage($data);
